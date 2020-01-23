@@ -1,5 +1,7 @@
 package com.jeuneseven;
 
+import com.jeuneseven.TimeTool.Task;
+
 public class Main {
 
     /*
@@ -34,6 +36,21 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        //耗时较多
+        TimeTool.check("fib1", new Task() {
+            @Override
+            public void execute() {
+                System.out.println(fib1(46));
+            }
+        });
+        //耗时较少
+        TimeTool.check("fib2", new Task() {
+            @Override
+            public void execute() {
+                System.out.println(fib2(46));
+            }
+        });
+
         System.out.println("Hello World！");
 
         System.out.println(fib1(0));
