@@ -44,7 +44,7 @@ public class Main {
      *
      * 		// 140000
      * 		// O(1)
-     * 		// O(1)
+     * 		// O(1) 空间复杂度
      *    }
      *
      * 	public static void test2(int n) {
@@ -117,7 +117,7 @@ public class Main {
      *    }
      *
      * 	public static void test10(int n) {
-     * 		// O(n)
+     * 		// O(n) 空间复杂度
      * 		int a = 10;
      * 		int b = 20;
      * 		int c = a + b;
@@ -129,6 +129,7 @@ public class Main {
      */
     /*
     * 求第N个斐波那契数，方法一
+    * O(2^n)
     * */
     public static int fib1(int n) {
         if (n <= 1){
@@ -141,6 +142,7 @@ public class Main {
      * 求第N个斐波那契数，方法二
      * 0 1 1 2 3 5 8 13 。。。
      * 1 2 3 5 8 13 。。。
+     * O(n)
      * */
     public static int fib2(int n) {
         if (n <= 1){
