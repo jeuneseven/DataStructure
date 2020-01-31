@@ -159,6 +159,34 @@ public class Main {
 
         return second;
     }
+    /**
+     * 精简版本
+     */
+    public static int fib3(int n) {
+        if (n <= 1){
+            return n;
+        }
+
+        int first = 0;
+        int second = 1;
+        while (n-- > 1) {
+            second += first;
+            first = second - first;
+        }
+
+        return second;
+    }
+    /**
+     * 线性代数解法，复杂度O(1)
+     */
+    public static int fib4(int n) {
+        if (n <= 1){
+            return n;
+        }
+
+        double c = Math.sqrt(5);
+        return (int)((Math.pow((1 + c) / 2, n) - Math.pow((1 - c) / 2, n)) / c);
+    }
 
     public static void main(String[] args) {
         int number = 40;
@@ -186,5 +214,8 @@ public class Main {
 //        System.out.println(fib1(30000));
         //方法二的效率就会高很多
         System.out.println(fib2(64));
+        System.out.println("------");
+        System.out.println(fib3(64));
+        System.out.println(fib4(64));
     }
 }

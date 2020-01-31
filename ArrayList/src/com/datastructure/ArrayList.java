@@ -68,7 +68,7 @@ public class ArrayList {
      * @param element
      */
     public void add(int element) {
-
+        elements[size++] = element;
     }
 
     /**
@@ -128,5 +128,22 @@ public class ArrayList {
             if (elements[i] == element) return i;
         }
         return ELEMENT_NOT_FOUND;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("size=").append(size).append(", [");
+        for (int i = 0; i < size; i++) {
+            if (i != 0) {
+                string.append(", ");
+            }
+            string.append(elements[i]);
+//            if (i != size - 1) {//如果不是最后一个元素
+//                string.append(",");
+//            }
+        }
+        string.append("]");
+        return string.toString();
     }
 }
