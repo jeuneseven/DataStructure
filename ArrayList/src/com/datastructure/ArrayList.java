@@ -112,10 +112,18 @@ public class ArrayList {
     /**
      * 删除index位置的元素
      * @param index
-     * @return
+     * @return 返回被删除的值
      */
     public int remove(int index) {
-        return 0;
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
+        }
+        int old = elements[index];
+        for (int i = index + 1; i < size - 1; i++) {
+            elements[i - 1] = elements[i];
+        }
+        size--;
+        return old;
     }
 
     /**
