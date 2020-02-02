@@ -106,7 +106,15 @@ public class ArrayList {
      * @param element
      */
     public void add(int index, int element) {
-
+        //允许在尾部插入元素
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
+        }
+        for (int i = size - 1; i >= index; i--) {
+            elements[i + 1] = elements[i];
+        }
+        elements[index] = element;
+        size++;
     }
 
     /**
@@ -119,7 +127,7 @@ public class ArrayList {
             throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
         }
         int old = elements[index];
-        for (int i = index + 1; i < size - 1; i++) {
+        for (int i = index + 1; i <= size - 1; i++) {
             elements[i - 1] = elements[i];
         }
         size--;
