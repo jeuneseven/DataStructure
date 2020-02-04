@@ -10,7 +10,7 @@ public class ArrayList {
      */
     private int[] elements;
     //final相当于const
-    private static final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 3;
     private static final int ELEMENT_NOT_FOUND = -1;
 
     public ArrayList(int capaticy) {
@@ -110,11 +110,28 @@ public class ArrayList {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
         }
+
+        ensureCapacity(size + 1);
+
         for (int i = size - 1; i >= index; i--) {
             elements[i + 1] = elements[i];
         }
         elements[index] = element;
         size++;
+    }
+    //保证容量并扩容
+    private void ensureCapacity(int capacity) {
+        int oldCapacity = elements.length;
+        if (oldCapacity >= capacity) {
+            return;
+        }
+//        int newCapacity = oldCapacity + (oldCapacity >> 1); 新容量为旧容量的1.5倍
+        int newCapacity = oldCapacity * 2;
+        int [] newElements = new int[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+        elements = newElements;
     }
 
     /**
