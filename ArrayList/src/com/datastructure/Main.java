@@ -13,13 +13,6 @@ public class Main {
 
 //        arrayList.remove(1);
         arrayList.add(0, 100);
-        arrayList.add(6, 0);
-        arrayList.add(0, 100);
-        arrayList.add(6, 0);
-        arrayList.add(0, 100);
-        arrayList.add(6, 0);
-        arrayList.add(0, 100);
-        arrayList.add(6, 0);
 
 
         System.out.println(arrayList.toString());

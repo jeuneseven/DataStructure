@@ -1,6 +1,6 @@
 package com.datastructure;
 
-public class ArrayList {
+public class ArrayList <Element> {
     /**
      * 元素的数量
      */
@@ -8,14 +8,14 @@ public class ArrayList {
     /**
      * 所有的元素
      */
-    private int[] elements;
+    private Element[] elements;
     //final相当于const
     private static final int DEFAULT_CAPACITY = 3;
     private static final int ELEMENT_NOT_FOUND = -1;
 
     public ArrayList(int capaticy) {
         capaticy = (capaticy < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capaticy;
-        elements = new int[capaticy];
+        elements = new Element[capaticy];
     }
 
     public ArrayList() {
@@ -59,7 +59,7 @@ public class ArrayList {
      * @param element
      * @return
      */
-    public boolean contains(int element) {
+    public boolean contains(Element element) {
         return indexOf(element) != ELEMENT_NOT_FOUND;
     }
 
@@ -67,7 +67,7 @@ public class ArrayList {
      * 添加元素到尾部
      * @param element
      */
-    public void add(int element) {
+    public void add(Element element) {
         elements[size++] = element;
     }
 
@@ -90,12 +90,12 @@ public class ArrayList {
      * @param element
      * @return 原来的元素ֵ
      */
-    public int set(int index, int element) {
+    public int set(int index, Element element) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
         }
 
-        int old = elements[index];
+        Element old = elements[index];
         elements[index] = element;
         return old;
     }
@@ -105,7 +105,7 @@ public class ArrayList {
      * @param index
      * @param element
      */
-    public void add(int index, int element) {
+    public void add(int index, Element element) {
         //允许在尾部插入元素
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
@@ -127,7 +127,7 @@ public class ArrayList {
         }
 //        int newCapacity = oldCapacity + (oldCapacity >> 1); 新容量为旧容量的1.5倍
         int newCapacity = oldCapacity * 2;
-        int [] newElements = new int[newCapacity];
+        Element [] newElements = new Element[newCapacity];
         for (int i = 0; i < size; i++) {
             newElements[i] = elements[i];
         }
@@ -139,11 +139,11 @@ public class ArrayList {
      * @param index
      * @return 返回被删除的值
      */
-    public int remove(int index) {
+    public Element remove(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
         }
-        int old = elements[index];
+        Element old = elements[index];
         for (int i = index + 1; i <= size - 1; i++) {
             elements[i - 1] = elements[i];
         }
@@ -156,7 +156,7 @@ public class ArrayList {
      * @param element
      * @return
      */
-    public int indexOf(int element) {
+    public int indexOf(Element element) {
         for (int i = 0; i < size; i++) {
             if (elements[i] == element) return i;
         }
