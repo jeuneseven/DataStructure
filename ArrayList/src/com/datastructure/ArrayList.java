@@ -15,7 +15,7 @@ public class ArrayList <Element> {
 
     public ArrayList(int capaticy) {
         capaticy = (capaticy < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capaticy;
-        elements = new Element[capaticy];
+        elements = (Element[]) new Object[capaticy];//所有的类都继承自Object
     }
 
     public ArrayList() {
@@ -34,8 +34,13 @@ public class ArrayList <Element> {
          *             elements = null;
          *         }
          */
+        //更改为泛型之后，要将整个内存地址清空，尽量循环利用，而非 elements = null，这是将整个数组清空并销毁
+        for (int i = 0; i < elements.length; i++) {
+            elements[i] = null;
+        }
         //高效利用空间和时间，无需清空真正内存，不会造成内存浪费
         size = 0;
+
     }
 
     /**
@@ -76,7 +81,7 @@ public class ArrayList <Element> {
      * @param index
      * @return
      */
-    public int get(int index) {
+    public Element get(int index) {
         if (index < 0 || index >= size) {
             //抛出异常
             throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
@@ -90,7 +95,7 @@ public class ArrayList <Element> {
      * @param element
      * @return 原来的元素ֵ
      */
-    public int set(int index, Element element) {
+    public Element set(int index, Element element) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
         }
@@ -127,11 +132,11 @@ public class ArrayList <Element> {
         }
 //        int newCapacity = oldCapacity + (oldCapacity >> 1); 新容量为旧容量的1.5倍
         int newCapacity = oldCapacity * 2;
-        Element [] newElements = new Element[newCapacity];
+        Object [] newElements = (Object [])new Object[newCapacity];
         for (int i = 0; i < size; i++) {
             newElements[i] = elements[i];
         }
-        elements = newElements;
+        elements = (Element [])newElements;
     }
 
     /**
@@ -148,6 +153,9 @@ public class ArrayList <Element> {
             elements[i - 1] = elements[i];
         }
         size--;
+        //改为泛型后，要将最后一个位置清空
+        elements[size] = null;
+
         return old;
     }
 
@@ -158,7 +166,8 @@ public class ArrayList <Element> {
      */
     public int indexOf(Element element) {
         for (int i = 0; i < size; i++) {
-            if (elements[i] == element) return i;
+            //改为泛型后，需要判断对象是否相等可以留给元素来实现，这样可以自定义，如果元素不实现，默认是 ==
+            if (elements[i].equals(element)) return i;
         }
         return ELEMENT_NOT_FOUND;
     }
