@@ -20,6 +20,11 @@ public class SomeClass {
     //重写父类的equals方法
     @Override
     public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj instanceof SomeClass) {
+            SomeClass someObject = (SomeClass)obj;
+            return this.intValue == ((SomeClass) obj).intValue;
+        }
         return super.equals(obj);
     }
 }

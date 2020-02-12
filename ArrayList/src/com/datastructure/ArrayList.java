@@ -1,5 +1,7 @@
 package com.datastructure;
-
+/**
+ * 后续可以从拷贝入手进行优化，防止出现数组元素过多造成的性能问题
+ */
 public class ArrayList <Element> {
     /**
      * 元素的数量
@@ -73,6 +75,7 @@ public class ArrayList <Element> {
      * @param element
      */
     public void add(Element element) {
+//        if (element == null) return;
         elements[size++] = element;
     }
 
@@ -111,6 +114,7 @@ public class ArrayList <Element> {
      * @param element
      */
     public void add(int index, Element element) {
+//        if (element == null) return; // 如果不支持存储空
         //允许在尾部插入元素
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
@@ -144,13 +148,13 @@ public class ArrayList <Element> {
      * @param index
      * @return 返回被删除的值
      */
-    public Element remove(int index) {
+    public Element remove(int index) {//如果删除的是第一个元素或比较靠前的元素，可以考虑环形数组进行优化
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
         }
         Element old = elements[index];
-        for (int i = index + 1; i <= size - 1; i++) {
-            elements[i - 1] = elements[i];
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];
         }
         size--;
         //改为泛型后，要将最后一个位置清空
@@ -159,16 +163,29 @@ public class ArrayList <Element> {
         return old;
     }
 
+    public void remove (Element e) {
+        remove(indexOf(e));
+    }
+
     /**
      * 查看元素的索引
      * @param element
      * @return
      */
     public int indexOf(Element element) {
-        for (int i = 0; i < size; i++) {
-            //改为泛型后，需要判断对象是否相等可以留给元素来实现，这样可以自定义，如果元素不实现，默认是 ==
-            if (elements[i].equals(element)) return i;
+        if (element == null) {
+            for (int i = 0; i < size; i++) {
+                //返回第一个为null的位置
+                if (elements[i] == null) return i;
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                //JAVA中 null 不能调用方法，会报错，所以此处为不为null的情况
+                //改为泛型后，需要判断对象是否相等可以留给元素来实现，这样可以自定义，如果元素不实现，默认是 ==
+                if (element.equals(elements[i])) return i;
+            }
         }
+
         return ELEMENT_NOT_FOUND;
     }
 
