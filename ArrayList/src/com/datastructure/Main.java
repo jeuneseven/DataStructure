@@ -12,6 +12,8 @@ public class Main {
         arrayList.add(null);
         arrayList.add(3);
 
+        Assert.test(arrayList.get(2) == 1);
+
         System.out.println(arrayList.indexOf(null));
 //        arrayList.add(4);
 //        arrayList.add(5);

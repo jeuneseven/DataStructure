@@ -15,6 +15,22 @@ public class ArrayList <Element> {
     private static final int DEFAULT_CAPACITY = 3;
     private static final int ELEMENT_NOT_FOUND = -1;
 
+    private void outOfBounds(int index) {
+        throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
+    }
+
+    private void rangeCheck (int index) {
+        if (index < 0 || index >= size) {
+            outOfBounds(index);
+        }
+    }
+
+    private void rangeCheckForAdd (int index) {
+        if (index < 0 || index > size) {
+            outOfBounds(index);
+        }
+    }
+
     public ArrayList(int capaticy) {
         capaticy = (capaticy < DEFAULT_CAPACITY) ? DEFAULT_CAPACITY : capaticy;
         elements = (Element[]) new Object[capaticy];//所有的类都继承自Object
@@ -75,8 +91,7 @@ public class ArrayList <Element> {
      * @param element
      */
     public void add(Element element) {
-//        if (element == null) return;
-        elements[size++] = element;
+        add(size, element);
     }
 
     /**
@@ -85,10 +100,7 @@ public class ArrayList <Element> {
      * @return
      */
     public Element get(int index) {
-        if (index < 0 || index >= size) {
-            //抛出异常
-            throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
-        }
+        rangeCheck(index);
         return elements[index];
     }
 
@@ -99,9 +111,7 @@ public class ArrayList <Element> {
      * @return 原来的元素ֵ
      */
     public Element set(int index, Element element) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
-        }
+        rangeCheck(index);
 
         Element old = elements[index];
         elements[index] = element;
@@ -116,9 +126,7 @@ public class ArrayList <Element> {
     public void add(int index, Element element) {
 //        if (element == null) return; // 如果不支持存储空
         //允许在尾部插入元素
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
-        }
+        rangeCheckForAdd(index);
 
         ensureCapacity(size + 1);
 
@@ -149,9 +157,7 @@ public class ArrayList <Element> {
      * @return 返回被删除的值
      */
     public Element remove(int index) {//如果删除的是第一个元素或比较靠前的元素，可以考虑环形数组进行优化
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index:" + index + ", Size:" + size);
-        }
+        rangeCheck(index);
         Element old = elements[index];
         for (int i = size; i > index; i--) {
             elements[i] = elements[i - 1];
