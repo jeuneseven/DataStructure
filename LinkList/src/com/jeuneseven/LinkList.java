@@ -1,5 +1,5 @@
 package com.jeuneseven;
 
-public class LinkList<Element> implements List<Element> {
+public class LinkList {
     private int size;
 }
