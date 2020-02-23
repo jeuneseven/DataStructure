@@ -1,6 +1,6 @@
 package com.jeuneseven;
 
-public interface List<Element> {
+public interface List<E> {
 	static final int ELEMENT_NOT_FOUND = -1;
 	/**
 	 * 清除所有元素
@@ -24,20 +24,20 @@ public interface List<Element> {
 	 * @param element
 	 * @return
 	 */
-	boolean contains(Element element);
+	boolean contains(E element);
 
 	/**
 	 * 添加元素到尾部
 	 * @param element
 	 */
-	void add(Element element);
+	void add(E element);
 
 	/**
 	 * 获取index位置的元素
 	 * @param index
 	 * @return
 	 */
-	Element get(int index);
+	E get(int index);
 
 	/**
 	 * 设置index位置的元素
@@ -45,26 +45,26 @@ public interface List<Element> {
 	 * @param element
 	 * @return 原来的元素ֵ
 	 */
-	Element set(int index, Element element);
+	E set(int index, E element);
 
 	/**
 	 * 在index位置插入一个元素
 	 * @param index
 	 * @param element
 	 */
-	void add(int index, Element element);
+	void add(int index, E element);
 
 	/**
 	 * 删除index位置的元素
 	 * @param index
 	 * @return
 	 */
-	Element remove(int index);
+	E remove(int index);
 
 	/**
 	 * 查看元素的索引
 	 * @param element
 	 * @return
 	 */
-	int indexOf(Element element);
+	int indexOf(E element);
 }

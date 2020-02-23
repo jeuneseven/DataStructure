@@ -1,8 +1,6 @@
 package com.jeuneseven;
 
-import javax.lang.model.element.Element;
-
-public abstract class AbstractList<E> implements List<Element>  {
+public abstract class AbstractList<E> implements List<E>  {
 	/**
 	 * 元素的数量
 	 */
@@ -28,7 +26,7 @@ public abstract class AbstractList<E> implements List<Element>  {
 	 * @param element
 	 * @return
 	 */
-	public boolean contains(Element element) {
+	public boolean contains(E element) {
 		return indexOf(element) != ELEMENT_NOT_FOUND;
 	}
 
@@ -36,7 +34,7 @@ public abstract class AbstractList<E> implements List<Element>  {
 	 * 添加元素到尾部
 	 * @param element
 	 */
-	public void add(Element element) {
+	public void add(E element) {
 		add(size, element);
 	}
 	
