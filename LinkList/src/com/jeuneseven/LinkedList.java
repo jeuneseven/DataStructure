@@ -106,11 +106,9 @@ public class LinkedList<E> extends AbstractList<E> {
 			node = node.next;
 		}
 		string.append("]");
-		
+		//也可以通过while循环
 //		Node<E> node1 = first;
 //		while (node1 != null) {
-//			
-//			
 //			node1 = node1.next;
 //		}
 		return string.toString();
