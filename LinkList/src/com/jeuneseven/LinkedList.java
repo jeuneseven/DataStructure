@@ -2,7 +2,14 @@ package com.jeuneseven;
 
 public class LinkedList<E> extends AbstractList<E> {
 	private Node<E> first;
-	
+	/**
+	 * 为代码精简，可增加虚拟头结点，统一处理所有节点
+	 *
+	 public LinkedList()	{
+	 first = new Node<>(null, null);
+	 }
+	 */
+
 	private static class Node<E> {
 		E element;
 		Node<E> next;
@@ -19,11 +26,21 @@ public class LinkedList<E> extends AbstractList<E> {
 	}
 
 	@Override
+	/**
+	 * 最好O(1) 首节点
+	 * 最坏O(n) 尾结点
+	 * 平均O(n)
+	 */
 	public E get(int index) {
 		return node(index).element;
 	}
 
 	@Override
+	/**
+	 * 最好O(1) 首节点
+	 * 最坏O(n) 尾结点
+	 * 平均O(n)
+	 */
 	public E set(int index, E element) {
 		Node<E> node = node(index);
 		E old = node.element;
@@ -33,9 +50,19 @@ public class LinkedList<E> extends AbstractList<E> {
 
 	@Override
 	public void add(int index, E element) {
+		rangeCheckForAdd(index);
+		//平均O(n)
+		/**
+		 * 增加虚拟头结点可以统一处理成
+		 * Node<E> prev = index == 0 ? first : node(index - 1);
+		 * prev.next = new Node<>(element, prev.next);
+		 * size++;
+		 */
+		//最好O(1)
 		if (index == 0) {
 			first = new Node<>(element, first);
 		} else {
+			//最坏O(n)
 			Node<E> prev = node(index - 1);
 			prev.next = new Node<>(element, prev.next);
 		}
@@ -44,6 +71,20 @@ public class LinkedList<E> extends AbstractList<E> {
 
 	@Override
 	public E remove(int index) {
+		rangeCheck(index);
+		/**
+		 * 最好O(1) 首节点
+		 * 最坏O(n) 尾结点
+		 * 平均O(n)
+		 */
+		/**
+		 * 增加虚拟头结点可以统一处理成
+		 * Node<E> prev = index == 0 ? first : node(index - 1);
+		 * node = prev.next;
+		 * prev.next = node.next;
+		 * size--;
+		 */
+
 		Node<E> node = first;//保存被删除的元素
 		if (index == 0) {
 			first = first.next;
@@ -83,7 +124,11 @@ public class LinkedList<E> extends AbstractList<E> {
 	 */
 	private Node<E> node(int index) {
 		rangeCheck(index);
-		
+		/**
+		 * 最好O(1) 首节点
+		 * 最坏O(n) 尾结点
+		 * 平均O(n)
+		 */
 		Node<E> node = first;
 		for (int i = 0; i < index; i++) {
 			node = node.next;

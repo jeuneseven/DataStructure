@@ -33,6 +33,10 @@ public abstract class AbstractList<E> implements List<E>  {
 	/**
 	 * 添加元素到尾部
 	 * @param element
+	 * 最好O(1)
+	 * 最坏O(n) 扩容时
+	 * 平均O(1)
+	 * 均摊O(1) 经过连续复杂度比较低的情况后，突然发生复杂度比较高的时候会使用
 	 */
 	public void add(E element) {
 		add(size, element);

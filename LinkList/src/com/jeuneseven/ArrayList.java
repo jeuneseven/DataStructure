@@ -33,8 +33,8 @@ public class ArrayList<E> extends AbstractList<E> {
 	 * @return
 	 */
 	public E get(int index) {
-		rangeCheck(index);
-		return elements[index];
+		rangeCheck(index);//O(1)
+		return elements[index];//O(1) 数组是直接取地址，和索引大小无关 (index * sizeof(int) + 数组首地址)
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class ArrayList<E> extends AbstractList<E> {
 	 */
 	public E set(int index, E element) {
 		rangeCheck(index);
-		
+		//O(1)
 		E old = elements[index];
 		elements[index] = element;
 		return old;
@@ -60,6 +60,11 @@ public class ArrayList<E> extends AbstractList<E> {
 		rangeCheckForAdd(index);
 		
 		ensureCapacity(size + 1);
+		/**
+		 * 最好 O（1）插入到最后
+		 * 最坏 O (n) 插入到头部
+		 * 平均 O（n）
+		 */
 		
 		for (int i = size; i > index; i--) {
 			elements[i] = elements[i - 1];
@@ -75,13 +80,37 @@ public class ArrayList<E> extends AbstractList<E> {
 	 */
 	public E remove(int index) {
 		rangeCheck(index);
-		
+		/**
+		 * 最好 O（1）删除最后
+		 * 最坏 O (n) 删除头部
+		 * 平均 O（n）
+		 */
 		E old = elements[index];
 		for (int i = index + 1; i < size; i++) {
 			elements[i - 1] = elements[i];
 		}
 		elements[--size] = null;
+
+		trim();
+
 		return old;
+	}
+
+	/**
+	 * 如果扩容倍数和缩容的时机设计不当，会造成复杂度震荡，临界的元素不停的添加删除
+	 * 要确保扩容倍数*缩容的倍数 != 1
+	 */
+	private void trim () {
+		int capacity = elements.length;
+		if (size >= (capacity >> 1) || capacity <= DEFAULT_CAPACITY) {//如果容量大于一半
+			return;
+		}
+		int newCapacity = (capacity >> 1);
+		E[] newElements = (E[]) new Object[newCapacity];
+		for (int i = 0; i < size; i++) {
+			newElements[i] = elements[i];
+		}
+		elements = newElements;
 	}
 
 	/**

@@ -10,7 +10,7 @@ public class _141_环形链表 {//思路是使用快慢指针
 
         ListNode slow = head;
         ListNode fast = head.next;
-
+        //判断条件不能省略，会造成空指针异常
         while (fast != null && fast.next != null) {
             if (slow == fast) {
                 return true;
