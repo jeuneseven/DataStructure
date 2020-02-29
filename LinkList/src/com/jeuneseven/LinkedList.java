@@ -1,5 +1,9 @@
 package com.jeuneseven;
 
+/**
+ *删除操作数量n/2 + n^2 / 2，除以n平均1/2 + n/2
+ * 哈希表使用了单链表，而非双向链表
+ */
 public class LinkedList<E> extends AbstractList<E> {
 	private Node<E> first;
 	/**
