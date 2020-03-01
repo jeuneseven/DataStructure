@@ -26,7 +26,8 @@ public class TwoWayLinkedList<E> extends AbstractList<E> {
     @Override
     public void clear() {
         /**
-         * JAVA 中不会造成循环引用
+         * JAVA 中不会造成循环引用，有GC root对象管理
+         * 官方clear方法中，还将node之间的prev、next都置为空，让除去迭代器之外的node结点清空
          */
         size = 0;
         first = null;
