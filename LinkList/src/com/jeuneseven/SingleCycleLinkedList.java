@@ -43,9 +43,11 @@ public class SingleCycleLinkedList<E> extends AbstractList<E>  {
         rangeCheckForAdd(index);
 
         if (index == 0) {
-            first = new SingleCycleLinkedList.Node<>(element, first);
-            Node<E>last = (size == 0) ? first : node(size - 1);
-            last.next = first;
+            //先不要修改first结点
+            Node<E> newFirst = new SingleCycleLinkedList.Node<>(element, first);
+            Node<E>last = (size == 0) ? first : node(size - 1);//拿到最后一个结点
+            last.next = newFirst;
+            first = newFirst;
         } else {
             SingleCycleLinkedList.Node<E> prev = node(index - 1);
             prev.next = new SingleCycleLinkedList.Node<>(element, prev.next);
