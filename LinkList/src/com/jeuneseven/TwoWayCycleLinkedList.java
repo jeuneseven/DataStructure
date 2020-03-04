@@ -2,6 +2,8 @@ package com.jeuneseven;
 //双向循环链表
 public class TwoWayCycleLinkedList<E> extends AbstractList<E> {
     private TwoWayCycleLinkedList.Node<E> first;
+    private TwoWayCycleLinkedList.Node<E> next;
+    private TwoWayCycleLinkedList.Node<E> current;
     /**
      * 为代码精简，可增加虚拟头结点，统一处理所有节点
      *
@@ -134,6 +136,35 @@ public class TwoWayCycleLinkedList<E> extends AbstractList<E> {
             node = node.next;
         }
         return node;
+    }
+
+    public void reset() {
+        current = first;
+    }
+
+    public E next() {
+        if (current == null) {
+            return null;
+        }
+
+        current = current.next;
+        return current.element;
+    }
+
+    public E remove() {
+        if (current == null) {
+            return null;
+        }
+
+        
+
+        remove(current);
+
+        return current;
+    }
+
+    private E remove(Node<E> node) {
+
     }
 
     @Override
