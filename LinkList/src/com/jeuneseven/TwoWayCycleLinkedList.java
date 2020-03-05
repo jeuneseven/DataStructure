@@ -155,16 +155,13 @@ public class TwoWayCycleLinkedList<E> extends AbstractList<E> {
         if (current == null) {
             return null;
         }
+//        remove(current);
 
-
-
-        remove(current);
-
-        return current;
+        return null;
     }
 
     private E remove(Node<E> node) {
-
+        return null;
     }
 
     @Override
