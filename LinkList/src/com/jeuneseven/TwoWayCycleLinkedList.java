@@ -156,7 +156,7 @@ public class TwoWayCycleLinkedList<E> extends AbstractList<E> {
             return null;
         }
 
-        
+
 
         remove(current);
 
