@@ -22,7 +22,7 @@ public class BinarySearchTree<E> {
         }
         //添加的不是第一个节点
         Node<E>node = rootNode;
-        
+
 
     }
 
