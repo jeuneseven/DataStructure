@@ -38,6 +38,11 @@ public class BinarySearchTree<E> {
         return false;
     }
 
+    private int compare(E e1, E e2) {
+
+        return 0;
+    }
+
     private void elementNotNullCheck(E element) {
         if (element == null) {
             throw new IllegalArgumentException("element can not null");
