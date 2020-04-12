@@ -3,6 +3,11 @@ package com.jeuneseven;
 public class BinarySearchTree<E> {
     private int size;
     private Node<E> rootNode;
+    private Comparator<E> comparator;
+
+    public BinarySearchTree(Comparator<E> comparator) {
+        this.comparator = comparator;
+    }
 
     public int size() {
         return size;
