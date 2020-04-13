@@ -44,8 +44,10 @@ public class BinarySearchTree<E> {
     }
 
     private int compare(E e1, E e2) {
+        if (this.comparator != null) {//优先使用内部比较器
 
-        return 0;
+        }
+        return 0;//如果没有比较器，应强制对象能够比较
     }
 
     private void elementNotNullCheck(E element) {
